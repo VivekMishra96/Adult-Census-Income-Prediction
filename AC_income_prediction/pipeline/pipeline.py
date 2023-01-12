@@ -2,10 +2,11 @@ from threading import Thread
 from AC_income_prediction.component.data_ingestion import DataIngestion
 from AC_income_prediction.component.data_transformation import DataTransformaion
 from AC_income_prediction.component.data_validation import DataValidation
+from AC_income_prediction.component.model_evaluation import ModelEvaluation
 from AC_income_prediction.component.model_trainer import ModelTrainer
 
 from AC_income_prediction.config.configuration import Configuration
-from AC_income_prediction.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, DataValidationArtifact, ModelTrainerArtifact
+from AC_income_prediction.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, DataValidationArtifact, ModelEvaluationArtifact, ModelTrainerArtifact
 from AC_income_prediction.exception import IncomePredictionException
 import sys,os
 
@@ -62,9 +63,21 @@ class Pipeline(Thread):
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 
     
-    def start_model_evaluation(self)-> DataIngestionArtifact:
+    def start_model_evaluation(
+        self,
+        data_ingestion_artifact: DataIngestionArtifact,
+        data_validation_artifact: DataValidationArtifact,
+        Model_trainer_artifact: ModelTrainerArtifact
+        )-> ModelEvaluationArtifact:
         try:
-            pass
+            model_eval = ModelEvaluation(
+                data_ingestion_artifact = data_ingestion_artifact,
+                data_validation_artifact = data_validation_artifact,
+                model_trainer_artifact = Model_trainer_artifact,
+                model_evaluation_config = self.config.get_model_evaluation_config()
+            )
+            
+            return model_eval.initiate_model_evaluation()
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 
     
@@ -86,6 +99,11 @@ class Pipeline(Thread):
             )
             model_trainer_artifact = self.start_model_trainer(
                 data_transformation_artifact=data_transformation_artifact
+            )
+            model_evaluation_artifact = self.start_model_evaluation(
+                data_ingestion_artifact=data_ingestion_artifact,
+                data_validation_artifact=data_validation_artifact,
+                Model_trainer_artifact=model_trainer_artifact
             )
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 
