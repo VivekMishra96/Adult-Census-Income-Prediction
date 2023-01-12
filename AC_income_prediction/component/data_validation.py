@@ -1,3 +1,4 @@
+
 import json
 import pandas as pd
 from AC_income_prediction.entity.config_entity import DataValidationConfig
@@ -189,9 +190,9 @@ class DataValidation:
             
             
             data_validation_artifact = DataValidationArtifact(
-                schema_file_path=schema_file_path,
-                report_page_file_path=report_page_file_path,
-                report_file_path=report_file_path,
+                schema_file_path=schema_file_path[0],
+                report_page_file_path=report_page_file_path[0],
+                report_file_path=report_file_path[0],
                 is_validated=True,
                 message="Data Validation Perform successully."
             )
