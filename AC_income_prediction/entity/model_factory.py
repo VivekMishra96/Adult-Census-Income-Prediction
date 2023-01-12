@@ -1,6 +1,5 @@
 from cmath import log
 import importlib
-from math import dist
 from pyexpat import model
 import numpy as np
 import yaml
@@ -17,7 +16,7 @@ from sklearn.metrics import accuracy_score,roc_auc_score
 GRID_SEARCH_KEY = "grid_search"
 MODULE_KEY = "module"
 CLASS_KEY = "class"
-PARAM_KEY = "param"
+PARAM_KEY = "params"
 MODEL_SELECTION_KEY = "model_selection"
 SEARCH_PARAM_GRID_KEY = "search_param_grid"
 
@@ -40,7 +39,7 @@ BestModel = namedtuple("BestModel",
 MetricInfoArtifact = namedtuple("MetricInfoArtifact",
                 ["model_name","model_object",
                  "train_accuracy","test_accuracy",
-                 "index_number"])
+                 "model_accuracy","index_number"])
 
 
 def evaluate_classification_model(
@@ -181,7 +180,7 @@ class ModelFactory:
             raise IncomePredictionException(e,sys) from e
     
     @staticmethod
-    def read_params(config_path:str)->dist:
+    def read_params(config_path:str)-> dict:
         try:
             with open(config_path) as yaml_file:
                 config:dict = yaml.safe_load(yaml_file)
@@ -209,16 +208,7 @@ class ModelFactory:
         input_feature,
         output_feature)->GridSearchedBestModel:
         
-        """
-        excute_grid_search_operation(): function will perform paramter search operation and
-        it will return you the best optimistic  model with best paramter:
-        estimator: Model object
-        param_grid: dictionary of paramter to perform search operation
-        input_feature: your all input features
-        output_feature: Target/Dependent features
-        ================================================================================
-        return: Function will return GridSearchOperation object
-        """
+
         try:
             grid_search_cv_ref = ModelFactory.class_for_name(
                 module_name = self.grid_search_cv_module,
@@ -253,14 +243,14 @@ class ModelFactory:
     
     def get_initialized_model_list(self)->List[InitializedModelDetail]:
         """
-        This function will return a list of model details.
-        return List[ModelDetail]
+        # This function will return a list of model details.
+        # return List[ModelDetail]
         """
         try:
             initialized_model_list = []
             
             for model_serial_number in self.models_initialization_config.keys():
-                model_initialization_config = self.model_initialization_config[model_serial_number]
+                model_initialization_config = self.models_initialization_config[model_serial_number]
                 model_obj_ref = ModelFactory.class_for_name(
                     module_name=model_initialization_config[MODULE_KEY],
                     class_name=model_initialization_config[CLASS_KEY]

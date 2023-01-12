@@ -2,9 +2,10 @@ from threading import Thread
 from AC_income_prediction.component.data_ingestion import DataIngestion
 from AC_income_prediction.component.data_transformation import DataTransformaion
 from AC_income_prediction.component.data_validation import DataValidation
+from AC_income_prediction.component.model_trainer import ModelTrainer
 
 from AC_income_prediction.config.configuration import Configuration
-from AC_income_prediction.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, DataValidationArtifact
+from AC_income_prediction.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, DataValidationArtifact, ModelTrainerArtifact
 from AC_income_prediction.exception import IncomePredictionException
 import sys,os
 
@@ -48,9 +49,16 @@ class Pipeline(Thread):
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 
         
-    def start_model_trainer(self)-> DataIngestionArtifact:
+    def start_model_trainer(
+        self,
+        data_transformation_artifact:DataTransformationArtifact
+        )-> ModelTrainerArtifact:
         try:
-            pass
+            model_trainer = ModelTrainer(
+                model_trainer_config=self.config.get_model_trainer_config(),
+                data_transformation_artifact=data_transformation_artifact
+            )
+            return model_trainer.initiate_model_trainer()
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 
     
@@ -76,6 +84,10 @@ class Pipeline(Thread):
                 data_ingestion_artifact=data_ingestion_artifact,
                 data_validation_artifact=data_validation_artifact
             )
-            
+            model_trainer_artifact = self.start_model_trainer(
+                data_transformation_artifact=data_transformation_artifact
+            )
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 
+        
+        
