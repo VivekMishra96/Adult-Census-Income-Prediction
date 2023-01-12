@@ -11,16 +11,24 @@ AUTHOR = "Vivek Mishra"
 PACKAGE = ['AC_income_prediction']
 REQUIREMENT_FILE_NAME = "requirements.txt"
 
+
+HYPHEN_E_DOT = "-e ."
+
 def get_requirement_details()->List[str]:
     """
     Description: This function is going to return list of requirement 
     mention in requirements.txt file
+
     return This function is going to return a list which contain name 
     of libraries mentioned in requirements.txt file
     
     """
-    with open(REQUIREMENT_FILE_NAME) as requirement_file:
-        return requirement_file.readlines().remove('-e .')
+    with open(REQUIREMENT_FILE_NAME) as requiremet_file:
+        requiremet_list = requiremet_file.readlines()
+        requiremet_list = [requiremet_name.replace("\n","") for requiremet_name in requiremet_list]
+        if HYPHEN_E_DOT in requiremet_list:
+            requiremet_list.remove(HYPHEN_E_DOT)
+        return requiremet_list
     
 
 setup(
