@@ -9,157 +9,565 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
 
 
+    <div class="col-md-8">
         <form action="/predict" method="post">
             <legend>Income Prediction Form</legend>
-            <div class="mb-3">
-                <label class="form-label">age</label>
-                <input class="form-control" type="text" name="age" placeholder="Enter a value of age"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">workclass</label>
-                <input class="form-control" type="text" name="workclass" placeholder="Enter a value of workclass"
-                    required />
+            <div class="">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">age</label>
+                            <input class="form-control" type="text" name="age" placeholder="Enter a value of age" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
 
-            </div>
-            <div class="mb-3">
-                <label class="form-label">fnlwgt</label>
-                <input class="form-control" type="text" name="fnlwgt"placeholder="Enter a value of fnlwgt" 
-                    required />
-            </div>
-            <div class="mb-3">
-            <label class="form-label">education</label>
-            <input class="form-control" type="text" name="race" placeholder="Enter a value of education"
-                    required />
+                        <div class="mb-3">
+                            <label class="form-label">workclass</label>
 
-            </div>
-            <div class="mb-3">
-                <label class="form-label">education num</label>
-                <input class="form-control" type="text" name="education_num" placeholder="Enter a value of education_num"
-                    required />
 
-            </div>
-            <div class="mb-3">
-                <label class="form-label">marital status</label>
-                <input class="form-control" type="text" name="marital_status" placeholder="Enter a value of marital_status" 
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">occupation</label>
-                <input class="form-control" type="text" name="occupation" placeholder="Enter a value of occupation"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">relationship</label>
-                <input class="form-control" type="text" name="relationship" placeholder="Enter a value of relationship"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">race</label>
-                <input class="form-control" type="text" name="race" placeholder="Enter a value of race"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">sex</label>
-                <input class="form-control" type="text" name="sex" placeholder="Enter a value of sex"
-                    required />
-            
-            </div>
-            <div class="mb-3">
-                <label class="form-label">capital_gain</label>
-                <input class="form-control" type="text" name="capital_gain" placeholder="Enter a value of capital_gain"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">capital_loss</label>
-                <input class="form-control" type="text" name="capital_loss" placeholder="Enter a value of capital_loss"
-                    required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">hours_per_week</label>
-                <input class="form-control" type="text" name="hours_per_week" placeholder="Enter a value of hours_per_week"
-                    required />
-           
-            </div>
-            <div class="mb-3">
-                <label class="form-label">native_country</label>
-                <input class="form-control" type="text" name="native_country" placeholder="Enter a value of native_country" 
-                    required />
-            </div>
-           
-                    <option value="<USA">
-                        &lt;USA
-                    </option>
-                    <option value="INDIA">
-                        income_prediction_data
-                    </option>
-                    <option value="MALASIYA">
-                        MALASIYA
-                    </option>
-                    <option value="CUBA">
-                        CUBA
-                    </option>
-                    <option value="THAILAND">
-                        THAILAND
-                    </option>
+                            <select class="form-control" name="workclass" placeholder="select workclass">
+                                <option value=" Local-gov">
+                                    Local-gov
+                                </option>
+                                <option value=" Private">
+                                    Private
+                                </option>
+                                <option value=" Self-emp-not-inc">
+                                    Self-emp-not-inc
+                                </option>
+                                <option value=" State-gov">
+                                    State-gov
+                                </option>
+                                <option value=" Federal-gov">
+                                    Federal-gov
+                                </option>
+                                <option value=" Self-emp-inc">
+                                    Self-emp-inc
+                                </option>
+                                <option value=" Without-pay">
+                                    Without-pay
+                                </option>
+                                <option value=" Never-worked">
+                                    Never-worked
+                                </option>
 
-                </select>
-            </div>
-            <div class="mb-3">
+                            </select>
 
-                <input class="btn btn-primary" type="submit" value="Predict income_prediction Value" required />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">education</label>
+
+                            <select class="form-control" name="education" placeholder="select education">
+
+                                <option value=" 1st-4th">
+                                    1st-4th
+                                </option>
+                                <option value=" 5th-6th">
+                                    5th-6th
+                                </option>
+                                <option value=" 7th-8th">
+                                    7th-8th
+                                </option>
+                                <option value=" 9th">
+                                    9th
+                                </option>
+                                <option value=" 10th">
+                                    10th
+                                </option>
+                                <option value=" 11th">
+                                    11th
+                                </option>
+                                <option value=" 12th">
+                                    12th
+                                </option>
+                                <option value=" Assoc-voc">
+                                    Assoc-voc
+                                </option>
+                                <option value=" Assoc-acdm">
+                                    Assoc-acdm
+                                </option>
+                                <option value=" Bachelors">
+                                    Bachelors
+                                </option>
+                                <option value=" Doctorate">
+                                    Doctorate
+                                </option>
+                                <option value=" HS-grad">
+                                    HS-grad
+                                </option>
+                                <option value=" Masters">
+                                    Masters
+                                </option>
+                                <option value=" Preschool">
+                                    Preschool
+                                </option>
+                                <option value=" Prof-school">
+                                    Prof-school
+                                </option>
+                                <option value=" Some-college">
+                                    Some-college
+                                </option>
+
+                            </select>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">fnlwgt</label>
+                            <input class="form-control" type="text" name="fnlwgt"
+                                placeholder="Enter a value of fnlwgt" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">education num</label>
+                            <input class="form-control" type="text" name="education_num"
+                                placeholder="Enter a value of education_num" />
+
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">marital status</label>
+
+                            <select class="form-control" name="marital_status" placeholder="select marital_status">
+                                <option value=" Divorced">
+                                    Divorced
+                                </option>
+                                <option value=" Married-civ-spouse">
+                                    Married-civ-spouse
+                                </option>
+                                <option value=" Married-spouse-absent">
+                                    Married-spouse-absent
+                                </option>
+                                <option value=" Married-AF-spouse">
+                                    Married-AF-spouse
+                                </option>
+                                <option value=" Never-married">
+                                    Never-married
+                                </option>
+                                <option value=" Separated">
+                                    Separated
+                                </option>
+                                <option value=" Widowed">
+                                    Widowed
+                                </option>
+
+                            </select>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="row">
+
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">occupation</label>
+                            <!-- <input class="form-control" type="text" name="occupation" placeholder="Enter a value of occupation"
+                               /> -->
+
+                            <select class="form-control" name="occupation" placeholder="select occupation">
+
+                                <option value=" Armed-Forces">
+                                    Armed-Forces
+                                </option>
+                                <option value=" Adm-clerical">
+                                    Adm-clerical
+                                </option>
+                                <option value=" Craft-repair">
+                                    Craft-repair
+                                </option>
+                                <option value=" Exec-managerial">
+                                    Exec-managerial
+                                </option>
+                                <option value=" Farming-fishing">
+                                    Farming-fishing
+                                </option>
+                                <option value=" Handlers-cleaners">
+                                    Handlers-cleaners
+                                </option>
+                                <option value=" Machine-op-inspct">
+                                    Machine-op-inspct
+                                </option>
+
+                                <option value=" Other-service">
+                                    Other-service
+                                </option>
+                                <option value=" Priv-house-serv">
+                                    Priv-house-serv
+                                </option>
+                                <option value=" Prof-specialty">
+                                    Prof-specialty
+                                </option>
+                                <option value=" Protective-serv">
+                                    Protective-serv
+                                </option>
+                                <option value=" Sales">
+                                    Sales
+                                </option>
+                                <option value=" Tech-support">
+                                    Tech-support
+                                </option>
+                                <option value=" Transport-moving">
+                                    Transport-moving
+                                </option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">relationship</label>
+                            <!-- <input class="form-control" type="text" name="relationship" placeholder="Enter a value of relationship"
+                               /> -->
+
+                            <select class="form-control" name="relationship" placeholder="select relationship">
+                                <option value=" Husband">
+                                    Husband
+                                </option>
+                                <option value=" Not-in-family">
+                                    Not-in-family
+                                </option>
+                                <option value=" Other-relative">
+                                    Other-relative
+                                </option>
+                                <option value=" Own-child">
+                                    Own-child
+                                </option>
+                                <option value=" Unmarried">
+                                    Unmarried
+                                </option>
+                                <option value=" Wife">
+                                    Wife
+                                </option>
+
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">race</label>
+                            <!-- <input class="form-control" type="text" name="race" placeholder="Enter a value of race"    /> -->
+                            <select class="form-control" name="race" placeholder="select race">
+                                <option value=" Amer-Indian-Eskimo">
+                                    Amer-Indian-Eskimo
+                                </option>
+                                <option value=" Asian-Pac-Islander">
+                                    Asian-Pac-Islander
+                                </option>
+                                <option value=" Black">
+                                    Black
+                                </option>
+                                <option value=" Other">
+                                    Other
+                                </option>
+                                <option value=" White">
+                                    White
+                                </option>
+
+                            </select>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">sex</label>
+                            <!-- <input class="form-control" type="text" name="sex" placeholder="Enter a value of sex"    /> -->
+
+                            <select class="form-control" name="sex" placeholder="select Gender">
+                                <option value=" Male">
+                                    Male
+                                </option>
+                                <option value=" Female">
+                                    Female
+                                </option>
+
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">capital_gain</label>
+                            <input class="form-control" type="text" name="capital_gain"
+                                placeholder="Enter a value of capital_gain" />
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">capital_loss</label>
+                            <input class="form-control" type="text" name="capital_loss"
+                                placeholder="Enter a value of capital_loss" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">hours_per_week</label>
+                            <input class="form-control" type="text" name="hours_per_week"
+                                placeholder="Enter a value of hours_per_week" />
+
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-6 col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">native_country</label>
+
+                            <select class="form-control" name="native_country" placeholder="Select native_country">
+
+
+                                <option value=" Cambodia">
+                                    Cambodia
+                                </option>
+                                <option value=" Canada">
+                                    Canada
+                                </option>
+                                <option value=" China">
+                                    China
+                                </option>
+                                <option value=" Columbia">
+                                    Columbia
+                                </option>
+                                <option value=" Cuba">
+                                    Cuba
+                                </option>
+                                <option value=" Dominican-Republic">
+                                    Dominican-Republic
+                                </option>
+                                <option value=" Ecuador">
+                                    Ecuador
+                                </option>
+                                <option value=" El-Salvador">
+                                    El-Salvador
+                                </option>
+                                <option value=" England">
+                                    England
+                                </option>
+                                <option value=" France">
+                                    France
+                                </option>
+                                <option value=" Germany">
+                                    Germany
+                                </option>
+                                <option value=" Greece">
+                                    Greece
+                                </option>
+                                <option value=" Guatemala">
+                                    Guatemala
+                                </option>
+                                <option value=" Haiti">
+                                    Haiti
+                                </option>
+                                <option value=" Holand-Netherlands">
+                                    Holand-Netherlands
+                                </option>
+                                <option value=" Honduras">
+                                    Honduras
+                                </option>
+                                <option value=" Hong">
+                                    Hong
+                                </option>
+                                <option value=" Hungary">
+                                    Hungary
+                                </option>
+                                <option value=" India">
+                                    India
+                                </option>
+                                <option value=" Iran">
+                                    Iran
+                                </option>
+                                <option value=" Ireland">
+                                    Ireland
+                                </option>
+                                <option value=" Italy">
+                                    Italy
+                                </option>
+                                <option value=" Jamaica">
+                                    Jamaica
+                                </option>
+                                <option value=" Japan">
+                                    Japan
+                                </option>
+                                <option value=" Laos">
+                                    Laos
+                                </option>
+                                <option value=" Mexico">
+                                    Mexico
+                                </option>
+                                <option value=" Nicaragua">
+                                    Nicaragua
+                                </option>
+                                <option value=" Outlying-US(Guam-USVI-etc)">
+                                    Outlying-US(Guam-USVI-etc)
+                                </option>
+                                <option value=" Peru">
+                                    Peru
+                                </option>
+                                <option value=" Philippines">
+                                    Philippines
+                                </option>
+                                <option value=" Poland">
+                                    Poland
+                                </option>
+                                <option value=" Portugal">
+                                    Portugal
+                                </option>
+                                <option value=" Puerto-Rico">
+                                    Puerto-Rico
+                                </option>
+                                <option value=" Scotland">
+                                    Scotland
+                                </option>
+                                <option value=" South">
+                                    South
+                                </option>
+                                <option value=" Taiwan">
+                                    Taiwan
+                                </option>
+                                <option value=" Thailand">
+                                    Thailand
+                                </option>
+                                <option value=" Trinadad&Tobago">
+                                    Trinadad&Tobago
+                                </option>
+                                <option value=" United-States">
+                                    United-States
+                                </option>
+                                <option value=" Vietnam">
+                                    Vietnam
+                                </option>
+                                <option value=" Yugoslavia">
+                                    Yugoslavia
+                                </option>
+
+                            </select>
+
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <input class="btn btn-primary" type="submit" value="Predict income_prediction Value" />
+
 
         </form>
     </div>
 
-    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
-        <div class="card">
-            <div class="card-header">
-              income prediction
+
+    <div class="col-md-4">
+        <div class="">
+            <div class="card">
+                <div class="card-header">
+                    income prediction
+                </div>
+                <div class="card-body">
+                    {% if context['income_prediction_data'] is not none %}
+                    <table class="table table-striped">
+                        <caption>income prediction </caption>
+                        <tr>
+                            <th>Input Feature</th>
+                            <th>Feature Value</th>
+
+                        </tr>
+                        {% for column,value in context['income_prediction_data'].items() %}
+
+
+
+                        <tr>
+                            <td>{{column}}</td>
+                            <td>{{value[0]}}</td>
+                        </tr>
+
+                        {% endfor %}
+                        <tr>
+
+                            <td>wage </td>
+                            <td>
+                                {{ context['wage'] }}
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td><strong>MODEL OUTPUT </strong> </td>
+                            <td>
+                                {{ median_income_prediction_value }}
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    {% else %}
+
+                    <h5 class="card-title">Submit Form</h5>
+                    <p class="card-text">Kindly provide necessary information to estimate Adult Census Income Prediction
+                    </p>
+
+
+
+                    {% endif %}
+                    Go to <a href="/" class="btn btn-primary">Home</a>
+                </div>
             </div>
-            <div class="card-body">
-        {% if context['income_prediction_data'] is not none %}
-        <table class="table table-striped">
-            <caption>income prediction </caption>
-            <tr>
-                <th>Input Feature</th>
-                <th>Feature Value</th>
-
-            </tr>
-            {% for column,value in context['income_prediction_data'].items() %}
-
-
-
-            <tr>
-                <td>{{column}}</td>
-                <td>{{value[0]}}</td>
-            </tr>
-
-            {% endfor %}
-            <tr>
-
-                <td>wage </td>
-                <td>
-                    {{ context['wage'] }}
-                </td>
-            </tr>
-        </table>
-
-        {% else %}
-       
-              <h5 class="card-title">Submit Form</h5>
-              <p class="card-text">Kindly provide necessary information to estimate Adult Census Income Prediction</p>
-            
-         
-
-        {% endif %}
-        Go to <a href="/" class="btn btn-primary">Home</a>
+        </div>
     </div>
 </div>
-    </div>
 
-    {% endblock %}
+
+
+{% endblock %}

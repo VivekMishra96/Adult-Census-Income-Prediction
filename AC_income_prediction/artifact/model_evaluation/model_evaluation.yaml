@@ -1,9 +1,2 @@
 best_model:
-  model_path: C:\Users\acer\Adult-Census-Income-Prediction\Adult-Census-Income-Prediction\AC_income_prediction\artifact\model_trainer\2023-01-12-21-12-05\trained_model\model.pkl
-history:
-  2023-01-12-18-04-41:
-    model_path: C:\Users\acer\Adult-Census-Income-Prediction\Adult-Census-Income-Prediction\AC_income_prediction\artifact\model_trainer\2023-01-12-17-55-29\trained_model\model.pkl
-  2023-01-12-18-50-08:
-    model_path: C:\Users\acer\Adult-Census-Income-Prediction\Adult-Census-Income-Prediction\AC_income_prediction\artifact\model_trainer\2023-01-12-18-04-41\trained_model\model.pkl
-  2023-01-12-21-12-05:
-    model_path: C:\Users\acer\Adult-Census-Income-Prediction\Adult-Census-Income-Prediction\AC_income_prediction\artifact\model_trainer\2023-01-12-18-50-08\trained_model\model.pkl
+  model_path: C:\Users\acer\Adult-Census-Income-Prediction\Adult-Census-Income-Prediction\AC_income_prediction\artifact\model_trainer\2023-01-13-00-03-31\trained_model\model.pkl

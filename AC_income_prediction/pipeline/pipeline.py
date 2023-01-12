@@ -1,5 +1,8 @@
 
 
+
+
+
 from AC_income_prediction.constant import EXPERIMENT_DIR_NAME, EXPERIMENT_FILE_NAME
 import pandas as pd
 from collections import namedtuple
@@ -23,6 +26,8 @@ from AC_income_prediction.entity.artifact_entity import DataIngestionArtifact, D
 from AC_income_prediction.exception import IncomePredictionException
 import sys,os
 
+from AC_income_prediction.constant import *
+
 
 Experiment = namedtuple("Experiment",
  ["experiment_id", "initialization_timestamp", "artifact_time_stamp",
@@ -34,6 +39,7 @@ Experiment = namedtuple("Experiment",
 class Pipeline(Thread):
     experiment: Experiment =  Experiment(*([None] * 11))
     experiment_file_path = None
+    test_config = Configuration()  
     
     def __init__(self,config: Configuration = Configuration()) -> None:
         try:
@@ -233,13 +239,25 @@ class Pipeline(Thread):
     @classmethod
     def get_experiments_status(cls, limit: int = 15)-> pd.DataFrame:
         try:
-            if os.path.exists(Pipeline.experiment_file_path):
-                df = pd.read_csv(Pipeline.experiment_file_path)
-                limit = -1 * int(limit)
-                
-                return df[limit:].drop(columns=["experiment_file_path", "initialization_timestamp"],axis=1)
+            experiment_file_path_test = Pipeline.experiment_file_path
+            if experiment_file_path_test == None:
+                experiment_file_path = os.path.join(Pipeline.test_config.training_pipeline_config.artifact_dir,EXPERIMENT_DIR_NAME,EXPERIMENT_FILE_NAME)
+                if os.path.exists(experiment_file_path):
+                    df = pd.read_csv(experiment_file_path)
+                    limit = -1 * int(limit)
+                    
+                    return df[limit:].drop(columns=["experiment_file_path", "initialization_timestamp"],axis=1)
+                else:
+                    return pd.DataFrame()
             else:
-                return pd.DataFrame()
+                
+                if os.path.exists(Pipeline.experiment_file_path):
+                    df = pd.read_csv(Pipeline.experiment_file_path)
+                    limit = -1 * int(limit)
+                    
+                    return df[limit:].drop(columns=["experiment_file_path", "initialization_timestamp"],axis=1)
+                else:
+                    return pd.DataFrame()
         except Exception as e:
             raise IncomePredictionException(e,sys) from e
         

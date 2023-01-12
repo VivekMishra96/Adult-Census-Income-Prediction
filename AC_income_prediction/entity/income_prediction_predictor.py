@@ -1,3 +1,5 @@
+
+
 import os,sys
 import pandas as pd
 from AC_income_prediction.exception import IncomePredictionException
@@ -6,18 +8,30 @@ from AC_income_prediction.util.util import load_object
 
 class IncomePredictionData:
     def __init__(
-        self, age:int, workclass: str, fnlwgt: int,
-        education_num:int, material_status: str,
-        occupation: str, relationship: str,
-        race: str, sex: str, capital_gain: int, 
-        capital_loss: int, hours_per_week: int, 
-        native_country: str,wages: str):
+        self, 
+        age:int, 
+        workclass: str,
+        fnlwgt: int,
+        education: str,
+        education_num:int, 
+        marital_status: str,
+        occupation: str, 
+        relationship: str,
+        race: str, 
+        sex: str, 
+        capital_gain: int, 
+        capital_loss: int, 
+        hours_per_week: int, 
+        country: str):
+        # wages: str=None):
+        
         try:
             self.age = age
             self.workclass = workclass
             self.fnlwgt = fnlwgt
+            self.education = education
             self.education_num = education_num
-            self.material_status = material_status
+            self.marital_status = marital_status
             self.occupation = occupation
             self.relationship = relationship
             self.race = race
@@ -25,8 +39,8 @@ class IncomePredictionData:
             self.capital_gain = capital_gain
             self.capital_loss = capital_loss
             self.hours_per_week = hours_per_week
-            self.native_country = native_country
-            self.wages = wages
+            self.country = country
+            # self.wages = wages
         
         except Exception as e:
             raise IncomePredictionException(e,sys) from e
@@ -44,8 +58,9 @@ class IncomePredictionData:
                             "age" : [self.age],
                             "workclass" : [self.workclass],
                             "fnlwgt" : [self.fnlwgt],
+                            "education": [self.education],
                             "education_num" : [self.education_num], 
-                            "material_status" : [self.material_status], 
+                            "marital_status" : [self.marital_status], 
                             "occupation" : [self.occupation],
                             "relationship" : [self.relationship],
                             "race" : [self.race],
@@ -53,8 +68,8 @@ class IncomePredictionData:
                             "capital_gain" : [self.capital_gain], 
                             "capital_loss" : [self.capital_loss],
                             "hours_per_week" : [self.hours_per_week], 
-                            "native_country" : [self.native_country],
-                            "wages" : [self.wages] 
+                            "country" : [self.country],
+                            # "wages" : [self.wages] 
                         }
             return input_data
         except Exception as e:
@@ -71,11 +86,11 @@ class IncomePredictionPredictor:
         
     def get_latest_model_path(self)-> str:
         try:
-            folder_name = list(map(int,os.listdir(self.model_dir)))
+            folder_name = list(map(str,os.listdir(self.model_dir)))
             latest_model_dir = os.path.join(
                 self.model_dir,f"{max(folder_name)}"
             )
-            file_name = os.listdir(latest_model_dir[0])
+            file_name = os.listdir(latest_model_dir)[0]
             latest_model_path = os.path.join(
                 latest_model_dir,
                 file_name

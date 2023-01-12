@@ -1,3 +1,5 @@
+
+
 import os,sys
 from AC_income_prediction.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, DataValidationArtifact
 from AC_income_prediction.entity.config_entity import DataTransformationonfig
@@ -48,7 +50,7 @@ class DataTransformaion:
             cat_pipeline = Pipeline(steps=[
                 ('imputer',SimpleImputer(strategy='most_frequent')),
                 ('one_hot_encoder', OneHotEncoder()),
-                ('sclaer', StandardScaler(with_mean=False))
+                ('scaler', StandardScaler(with_mean=False))
             ])
             
             logging.info(f"Categorical columns: {categorical_columns}")

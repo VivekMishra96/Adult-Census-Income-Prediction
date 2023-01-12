@@ -3,11 +3,11 @@
 
 <head>
     <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://kit.fontawesome.com/778c911bcf.js" crossorigin="anonymous"></script>
     <style>
-   
         .col-md-2 {
             margin-bottom: 20px;
             margin-top: 20px;
@@ -19,39 +19,520 @@
     {% block head %}{% endblock %}
 </head>
 <style>
+    table {
+        -webkit-box-shadow: 0px 7px 16px -2px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 0px 7px 16px -2px rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 7px 16px -2px rgba(0, 0, 0, 0.75);
+        width: 100%;
+        overflow: scroll;
+        table-layout: fixed;
+        width: 100%;
 
-    table{
-        -webkit-box-shadow: 0px 7px 16px -2px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 7px 16px -2px rgba(0,0,0,0.75);
-box-shadow: 0px 7px 16px -2px rgba(0,0,0,0.75);
-width:100%;
-overflow:scroll;
-table-layout: fixed;
-    width: 100%; 
- 
-    overflow:scroll;
-    min-height: 400px; /* table height here */
-  border-collapse: collapse;
+        overflow: scroll;
+        min-height: 400px;
+        /* table height here */
+        border-collapse: collapse;
     }
-    
-    th,td {
-        text-align:left;
-    word-wrap: break-word;
-}
+
+    th,
+    td {
+        text-align: left;
+        word-wrap: break-word;
+    }
 </style>
+<style>
+    body {
+        position: relative;
+        min-height: 100%;
+    }
+
+    a {
+        transition: background 0.2s, color 0.2s;
+    }
+
+    a:hover,
+    a:focus {
+        text-decoration: none;
+    }
+
+    #wrapper {
+        padding-left: 0;
+        transition: all 0.5s ease;
+        position: relative;
+    }
+
+    #sidebar-wrapper {
+        z-index: 1000;
+        position: fixed;
+        left: 250px;
+        width: 0;
+        height: 100%;
+        margin-left: -250px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background: #222;
+        transition: all 0.5s ease;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 250px;
+    }
+
+    .sidebar-brand {
+        position: absolute;
+        top: 0;
+        width: 250px;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .sidebar-brand h2 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 24px;
+        color: #fff;
+    }
+
+    .sidebar-nav {
+        position: absolute;
+        top: 75px;
+        width: 250px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .sidebar-nav>li {
+        text-indent: 10px;
+        line-height: 42px;
+    }
+
+    .sidebar-nav>li a {
+        display: block;
+        text-decoration: none;
+        color: #757575;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    .sidebar-nav>li:hover,
+    .sidebar-nav>li.active {
+        text-decoration: none;
+        color: #fff;
+        background: #F8BE12;
+    }
+
+    .sidebar-nav>li>a i.fa {
+        font-size: 24px;
+        width: 60px;
+    }
+
+    #navbar-wrapper {
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+    }
+
+    #wrapper.toggled #navbar-wrapper {
+        position: absolute;
+        margin-right: -250px;
+    }
+
+    #navbar-wrapper .navbar {
+        border-width: 0 0 0 0;
+        background-color: #f8be12;
+        font-size: 24px;
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    #navbar-wrapper .navbar a {
+        color: #fff;
+    }
+
+    #navbar-wrapper .navbar a:hover {
+        color: #222;
+    }
+
+    #content-wrapper {
+        width: 100%;
+        position: absolute;
+        padding: 12px;
+        padding-bottom: 0;
+        top: 100px;
+    }
+
+    #wrapper.toggled #content-wrapper {
+        position: absolute;
+        margin-right: -250px;
+    }
+
+    @media (min-width: 992px) {
+        #wrapper {
+            padding-left: 250px;
+        }
+
+        #wrapper.toggled {
+            padding-left: 60px;
+        }
+
+        #sidebar-wrapper {
+            width: 250px;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            width: 0px;
+        }
+
+        #wrapper.toggled #navbar-wrapper {
+            position: absolute;
+            margin-right: -190px;
+        }
+
+        #wrapper.toggled #content-wrapper {
+            position: absolute;
+            margin-right: -190px;
+        }
+
+        #navbar-wrapper {
+            position: relative;
+        }
+
+        #wrapper.toggled {
+            padding-left: 0px;
+        }
+
+        #content-wrapper {
+            position: relative;
+            top: 0;
+        }
+
+        #wrapper.toggled #navbar-wrapper,
+        #wrapper.toggled #content-wrapper {
+            position: relative;
+            margin-right: 60px;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        #wrapper {
+            padding-left: 60px;
+        }
+
+        #sidebar-wrapper {
+            width: 60px;
+        }
+
+        #wrapper.toggled #navbar-wrapper {
+            position: absolute;
+            margin-right: -250px;
+        }
+
+        #wrapper.toggled #content-wrapper {
+            position: absolute;
+            margin-right: -250px;
+        }
+
+        #navbar-wrapper {
+            position: relative;
+        }
+
+        #wrapper.toggled {
+            padding-left: 250px;
+        }
+
+        #content-wrapper {
+            position: relative;
+            top: 0;
+        }
+
+        #wrapper.toggled #navbar-wrapper,
+        #wrapper.toggled #content-wrapper {
+            position: relative;
+            margin-right: 250px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        #wrapper {
+            padding-left: 0;
+        }
+
+        #sidebar-wrapper {
+            width: 0;
+        }
+
+        #wrapper.toggled #sidebar-wrapper {
+            width: 250px;
+        }
+
+        #wrapper.toggled #navbar-wrapper {
+            position: absolute;
+            margin-right: -250px;
+        }
+
+        #wrapper.toggled #content-wrapper {
+            position: absolute;
+            margin-right: -250px;
+        }
+
+        #navbar-wrapper {
+            position: relative;
+        }
+
+        #wrapper.toggled {
+            padding-left: 250px;
+        }
+
+        #content-wrapper {
+            position: relative;
+            top: 0;
+        }
+
+        #wrapper.toggled #navbar-wrapper,
+        #wrapper.toggled #content-wrapper {
+            position: relative;
+            margin-right: 250px;
+        }
+    }
+
+    .content-title {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .inpt-box button {
+        color: #fff;
+        background: #f8be12 !important;
+        background-color: rgb(248, 190, 18);
+        border: 1px solid #f8be12 !important;
+        padding: 3px 10px 8px;
+        margin: 0;
+    }
+
+    .inpt-box button:hover {
+        color: #222;
+        background: #f8be12;
+        border: 1px solid #f8be12;
+    }
+
+    .inpt-box input {
+        padding: 2px 0 8px 11px;
+        border-radius: 5px;
+        border: 1px solid #fff;
+        box-shadow: 0 0 2px 0px #f8be12;
+    }
+
+    .inpt-box input:hover {
+        border: 1px solid #f8be12;
+    }
+
+    .desh-box {
+        border: 1px solid #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 2px 0px #f8be12;
+    }
+
+    .chart-img {
+        padding: 20px 0 12px !important;
+    }
+
+    .desh-box:hover {
+        box-shadow: 0 0 4px 0px #f8be12;
+    }
+
+    .desh-box div h5 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #f8be12;
+    }
+
+    .desh-box h4 {
+        font-size: 20px;
+        margin: 10px 0;
+    }
+
+    .desh-box div a {
+        color: #3a87ff;
+        text-decoration: none;
+    }
+
+    .desh-box div a:hover {
+        color: #f8be12;
+    }
+
+    .week-box {
+        background: #e0e4e775;
+        padding: 15px 0;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+
+    .scnd-chart {
+        width: 500px;
+    }
+
+    .week h4 {
+        color: #fa413e;
+    }
+
+    .copy-right-txt a {
+        color: #222 !important;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .hide_block{
+        display: none;
+    }
+</style>
+
 <body style="background-color: #f1f1f1;">
 
+    <div id="wrapper">
+
+        <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <h2>ACIP</h2>
+            </div>
+            <ul class="sidebar-nav">
+                <li class=" {% if 'home' in request.path %} active {% endif %}">
+                    <a href="/"><i class="fa fa-home"></i>Home</a>
+                </li>
+                <li class="nav-link {% if 'logs' in request.path %} active {% endif %}" >
+                    <a href="/logs">View Logs</a>
+                </li>
+                <li class="nav-link {% if 'artifact' in request.path %} active {% endif %}" >
+                    <a href="/artifact">View
+                        Artifacts</a>
+                </li>
+                <li class="nav-link {% if 'saved_models' in request.path %} active {% endif %}">
+                    <a href="/saved_models">View Trained Model</a>
+                </li>
+                <li class="nav-link {% if 'predict' in request.path %} active {% endif %}" >
+                    <a href="/predict">Income
+                        Prediction</a>
+                </li>
+                <li class="nav-link {% if 'train' in request.path %} active {% endif %}" >
+                    <a href="/train">Train Income Model</a>
+    
+                </li>
+                
+                <li class="nav-link {% if 'view_experiment_hist' in request.path %} active {% endif %}">
+                    <a 
+                        href="/view_experiment_hist">Experiment History</a>
+                </li>
+            </ul>
+        </aside>
+    
+        <div id="navbar-wrapper">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="#" class="navbar-brand" id="sidebar-toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    
+        <section id="content-wrapper" >
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="content-title">Adult Census Income Prediction</h4>
+                        <div class="inpt-box">
+                            <!-- <input class="inpt" placeholder="search">
+                        <button class="btn btn-info">submit</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div ">
+                {% block content %}
+        
+        
+                {% endblock %}
+        
+            </div>
+    
+            
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="text-center text-light p-2 copy-right-txt" style="background-color: rgb(248, 190, 18);">
+        <div class="col-lg-12 col-md-12 col-12 px-0 pt-3">
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+    
+                <!-- Twitter -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+    
+                <!-- Google -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+    
+                <!-- Instagram -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+    
+                <!-- Linkedin -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+                <!-- Github -->
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+            </section>
+        </div>
+        
+        <div class="col-lg-12 col-md-12 col-12 px-0 pt-3">
+            <div class="text-center text-light p-2 copy-right-txt" style="background-color: rgb(248, 190, 18);">
+                © 2022 Copyright:
+                <a class="text-light" href="https://ineuron.ai/">Vivek Mishra (iNeuron FSDF NOV batch)</a>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    </div>
 
 
     <!---
     
     navbar code
     
-    
-    
     -->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
                 aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,31 +548,35 @@ table-layout: fixed;
                         <a class="nav-link {% if 'log' in request.path %} active {% endif %}" href="/logs">View Logs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if 'artifact' in request.path %} active {% endif %}" href="/artifact">View Artifacts</a>
+                        <a class="nav-link {% if 'artifact' in request.path %} active {% endif %}" href="/artifact">View
+                            Artifacts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if 'saved_models' in request.path %} active {% endif %}" href="/saved_models">View Trained Model</a>
+                        <a class="nav-link {% if 'saved_models' in request.path %} active {% endif %}"
+                            href="/saved_models">View Trained Model</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if 'predict' in request.path %} active {% endif %}" href="/predict">Adult Census Income Prediction</a>
+                        <a class="nav-link {% if 'predict' in request.path %} active {% endif %}" href="/predict">Adult
+                            Census Income Prediction</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if 'predict' in request.path %} active {% endif %}" href="/view_experiment_hist">Experiment History</a>
+                        <a class="nav-link {% if 'predict' in request.path %} active {% endif %}"
+                            href="/view_experiment_hist">Experiment History</a>
                     </li>
                 </ul>
             </div>
         </div>
         </div>
-    </nav>
+    </nav> -->
 
 
 
-    <div class="row" style="margin-left: 5%;margin-right:5%;">
-       
+    <!-- <div class="row" style="margin-left: 5%;margin-right:5%;">
+
         <div class="col-md-2 col-sm-12 col-lg-2">
             <ul class=" list-group ">
                 <li class="list-group-item py-1  {% if 'log' in request.path %} active {% endif %}">
-                    <a  style=" text-decoration: none;color:black" href="/logs">View Logs</a>
+                    <a style=" text-decoration: none;color:black" href="/logs">View Logs</a>
                 </li>
                 <li class="list-group-item py-1 {% if 'artifact' in request.path %} active {% endif %}">
                     <a style=" text-decoration: none;color:rgb(0, 0, 0)" href="/artifact">View Artifacts</a>
@@ -105,7 +590,7 @@ table-layout: fixed;
                 <li class="list-group-item py-1 {% if 'train' in request.path %} active {% endif %}">
                     <a style=" text-decoration: none;color:black" href="/train">Train Income Prediction Estimator</a>
                 </li>
-                
+
 
 
                 <li class="list-group-item py-1 {% if 'update_model_config' in request.path %} active {% endif %}">
@@ -115,60 +600,52 @@ table-layout: fixed;
 
         </div>
 
-        <div class="col-md-8 col-sm-12 col-lg-9" style="margin-top:20px;"> 
-            {% block content %}
+        
 
-
-            {% endblock %}
-
-        </div>
-
-    </div>
+    </div> -->
 
     <!-- footer goes here-->
 
 
 
 
-    <footer class="text-center text-white " style="background-color: #d4d2d2;">
-        <!-- Grid container -->
+    <!-- <footer class="text-center text-white " style="background-color: #d4d2d2;">
+     
         <div class="container pt-4">
-            <!-- Section: Social media -->
+        
             <section class="mb-4">
-                <!-- Facebook -->
+            
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
                     data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
 
-                <!-- Twitter -->
+        
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
                     data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
 
-                <!-- Google -->
+
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
                     data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
 
-                <!-- Instagram -->
+         
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
                     data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
 
-                <!-- Linkedin -->
+            
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
                     data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
-                <!-- Github -->
+          
                 <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
                     data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
             </section>
-            <!-- Section: Social media -->
+    
         </div>
-        <!-- Grid container -->
-
-        <!-- Copyright -->
+    
         <div class="text-center text-light p-3" style="background-color: rgba(3, 36, 67, 0.504);">
             © 2022 Copyright:
             <a class="text-light" href="https://ineuron.ai/">iNeuron Intelligence Pvt Limited</a>
         </div>
-        <!-- Copyright -->
-    </footer>
+   
+    </footer> -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -176,5 +653,14 @@ table-layout: fixed;
         crossorigin="anonymous"></script>
 
 </body>
+<script>
+    const $button = document.querySelector('#sidebar-toggle');
+    const $wrapper = document.querySelector('#wrapper');
+
+    $button.addEventListener('click', (e) => {
+        e.preventDefault();
+        $wrapper.classList.toggle('toggled');
+    });
+</script>
 
 </html>
