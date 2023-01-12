@@ -18,6 +18,7 @@ columns:
 
 categorical_columns:
 - workclass
+- education
 - marital_status
 - occupation
 - relationship

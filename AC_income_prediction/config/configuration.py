@@ -1,4 +1,4 @@
-#from macpath import join
+from macpath import join
 from AC_income_prediction.entity.config_entity import DataIngestionConfig, DataTransformationonfig, DataValidationConfig, ModelEvaluationConfig, ModelPusherConfig, ModelTrainerConfig, TrainingPipelineConfig
 from AC_income_prediction.exception import IncomePredictionException
 import sys,os

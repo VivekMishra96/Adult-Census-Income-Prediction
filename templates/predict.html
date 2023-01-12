@@ -1,0 +1,165 @@
+{% extends 'header.html' %}
+
+{% block head %}
+
+
+<title>Housing Estimator</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
+
+
+        <form action="/predict" method="post">
+            <legend>Income Prediction Form</legend>
+            <div class="mb-3">
+                <label class="form-label">age</label>
+                <input class="form-control" type="text" name="age" placeholder="Enter a value of age"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">workclass</label>
+                <input class="form-control" type="text" name="workclass" placeholder="Enter a value of workclass"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">fnlwgt</label>
+                <input class="form-control" type="text" name="fnlwgt"placeholder="Enter a value of fnlwgt" 
+                    required />
+            </div>
+            <div class="mb-3">
+            <label class="form-label">education</label>
+            <input class="form-control" type="text" name="race" placeholder="Enter a value of education"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">education num</label>
+                <input class="form-control" type="text" name="education_num" placeholder="Enter a value of education_num"
+                    required />
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">marital status</label>
+                <input class="form-control" type="text" name="marital_status" placeholder="Enter a value of marital_status" 
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">occupation</label>
+                <input class="form-control" type="text" name="occupation" placeholder="Enter a value of occupation"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">relationship</label>
+                <input class="form-control" type="text" name="relationship" placeholder="Enter a value of relationship"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">race</label>
+                <input class="form-control" type="text" name="race" placeholder="Enter a value of race"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">sex</label>
+                <input class="form-control" type="text" name="sex" placeholder="Enter a value of sex"
+                    required />
+            
+            </div>
+            <div class="mb-3">
+                <label class="form-label">capital_gain</label>
+                <input class="form-control" type="text" name="capital_gain" placeholder="Enter a value of capital_gain"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">capital_loss</label>
+                <input class="form-control" type="text" name="capital_loss" placeholder="Enter a value of capital_loss"
+                    required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">hours_per_week</label>
+                <input class="form-control" type="text" name="hours_per_week" placeholder="Enter a value of hours_per_week"
+                    required />
+           
+            </div>
+            <div class="mb-3">
+                <label class="form-label">native_country</label>
+                <input class="form-control" type="text" name="native_country" placeholder="Enter a value of native_country" 
+                    required />
+            </div>
+           
+                    <option value="<USA">
+                        &lt;USA
+                    </option>
+                    <option value="INDIA">
+                        income_prediction_data
+                    </option>
+                    <option value="MALASIYA">
+                        MALASIYA
+                    </option>
+                    <option value="CUBA">
+                        CUBA
+                    </option>
+                    <option value="THAILAND">
+                        THAILAND
+                    </option>
+
+                </select>
+            </div>
+            <div class="mb-3">
+
+                <input class="btn btn-primary" type="submit" value="Predict income_prediction Value" required />
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-6 col-lg-6">
+        <div class="card">
+            <div class="card-header">
+              income prediction
+            </div>
+            <div class="card-body">
+        {% if context['income_prediction_data'] is not none %}
+        <table class="table table-striped">
+            <caption>income prediction </caption>
+            <tr>
+                <th>Input Feature</th>
+                <th>Feature Value</th>
+
+            </tr>
+            {% for column,value in context['income_prediction_data'].items() %}
+
+
+
+            <tr>
+                <td>{{column}}</td>
+                <td>{{value[0]}}</td>
+            </tr>
+
+            {% endfor %}
+            <tr>
+
+                <td>wage </td>
+                <td>
+                    {{ context['wage'] }}
+                </td>
+            </tr>
+        </table>
+
+        {% else %}
+       
+              <h5 class="card-title">Submit Form</h5>
+              <p class="card-text">Kindly provide necessary information to estimate Adult Census Income Prediction</p>
+            
+         
+
+        {% endif %}
+        Go to <a href="/" class="btn btn-primary">Home</a>
+    </div>
+</div>
+    </div>
+
+    {% endblock %}
