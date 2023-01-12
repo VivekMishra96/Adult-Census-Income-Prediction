@@ -2,7 +2,7 @@ from collections import namedtuple
 
 
 DataIngestionConfig = namedtuple("DataIngestionConfig",
-['dataset_url','raw_dir','raw_data_file','ingested_dir',
+['dataset_url','raw_dir','zip_data_dir','raw_data_file','ingested_dir',
  'ingested_train_dir','ingested_test_dir'])
 
 

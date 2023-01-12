@@ -36,6 +36,11 @@ class Configuration:
                 data_ingestion_info[DATA_INGESTION_RAW_DATA_DIR_KEY]
             )
             
+            zip_data_dir = os.path.join(
+                data_ingestion_artifact_dir,
+                data_ingestion_info[DATA_INGESTION_RAW_ZIP_DATA_DIR_KEY]
+            )
+            
             raw_data_file = os.path.join(
                 data_ingestion_artifact_dir,
                 raw_data_dir,
@@ -49,17 +54,20 @@ class Configuration:
             
             ingested_train_dir = os.path.join(
                 data_ingestion_artifact_dir,
+                data_ingestion_info[DATA_INGESTION_INGESTED_DIR_NAME_KEY],
                 data_ingestion_info[DATA_INGESTION_TRAIN_DIR_KEY]
             )
             
             ingested_test_dir = os.path.join(
                 data_ingestion_artifact_dir,
+                data_ingestion_info[DATA_INGESTION_INGESTED_DIR_NAME_KEY],
                 data_ingestion_info[DATA_INGESTION_TEST_DIR_KEY]
             )
                         
             data_ingestion_config = DataIngestionConfig(
                 dataset_url=dataset_url,
                 raw_dir=raw_data_dir,
+                zip_data_dir=zip_data_dir,
                 raw_data_file=raw_data_file,
                 ingested_dir=ingested_dir,
                 ingested_train_dir=ingested_train_dir,
