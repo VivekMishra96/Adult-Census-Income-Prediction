@@ -1,12 +1,21 @@
+
+
+
+
+
+
+
+
 from threading import Thread
 from AC_income_prediction.component.data_ingestion import DataIngestion
 from AC_income_prediction.component.data_transformation import DataTransformaion
 from AC_income_prediction.component.data_validation import DataValidation
 from AC_income_prediction.component.model_evaluation import ModelEvaluation
+from AC_income_prediction.component.model_pusher import ModelPusher
 from AC_income_prediction.component.model_trainer import ModelTrainer
 
 from AC_income_prediction.config.configuration import Configuration
-from AC_income_prediction.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, DataValidationArtifact, ModelEvaluationArtifact, ModelTrainerArtifact
+from AC_income_prediction.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, DataValidationArtifact, ModelEvaluationArtifact, ModelPusherArtifact, ModelTrainerArtifact
 from AC_income_prediction.exception import IncomePredictionException
 import sys,os
 
@@ -81,9 +90,17 @@ class Pipeline(Thread):
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 
     
-    def start_model_pusher(self)-> DataIngestionArtifact:
+    def start_model_pusher(
+        self,
+        model_eval_artifact: ModelEvaluationArtifact)-> ModelPusherArtifact:
         try:
-            pass
+            model_pusher = ModelPusher(
+                model_pusher_config=self.config.get_model_pusher_config(),
+                model_evaluation_artifact=model_eval_artifact
+            )
+            
+            return model_pusher.initiate_model_pusher()
+        
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 
     
@@ -104,6 +121,9 @@ class Pipeline(Thread):
                 data_ingestion_artifact=data_ingestion_artifact,
                 data_validation_artifact=data_validation_artifact,
                 Model_trainer_artifact=model_trainer_artifact
+            )
+            model_pusher_artifact = self.start_model_pusher(
+                model_eval_artifact=model_evaluation_artifact
             )
         except Exception as e:
             raise IncomePredictionException(e,sys) from e 

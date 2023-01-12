@@ -221,7 +221,20 @@ class Configuration:
     
     def get_model_pusher_config(self)-> ModelPusherConfig:
         try:
-            pass
+            time_stamp = get_current_time_stamp()
+            model_pusher_config_info = self.config_info[MODEL_PUSHER_CONFIG_KEY]
+            
+            export_dir_path = os.path.join(
+                ROOT_DIR,
+                model_pusher_config_info[MODEL_PUSHER_MODEL_EXPORT_DIR_KEY],
+                time_stamp
+            )
+            model_pusher_config = ModelPusherConfig(
+                export_dir_path=export_dir_path
+            )
+            
+            logging.info(f"Model pusher config {model_pusher_config}")
+            return model_pusher_config
         except Exception as e:
             raise IncomePredictionException(e,sys) from e
 
