@@ -1,0 +1,52 @@
+columns:
+  age: int64 
+  workclass: object
+  fnlwgt: int64
+  education: object 
+  education_num: int64 
+  marital_status: object
+  occupation: object
+  relationship: object
+  race: object
+  sex: object
+  capital_gain: int64 
+  capital_loss: int64 
+  hours_per_week: int64 
+  country: object
+  salary: object
+
+
+categorical_columns:
+- workclass
+- marital_status
+- occupation
+- relationship
+- country
+- race
+- sex
+
+
+numerical_columns:
+- age
+- fnlwgt
+- education_num
+- capital_gain
+- capital_loss
+- hours_per_week
+
+
+target_column: salary
+
+domain_value:
+  marital-status:
+    - Never-married
+    - Married-civ-spouse
+    - Divorced
+    - Married-spouse-absent
+    - Separated
+    - Married-AF-spouse
+    - Widowed
+
+  sex:
+    - Male
+    - Female
